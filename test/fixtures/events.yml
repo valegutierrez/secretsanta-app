@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  members: 1
+  price_start: 1
+  price_end: 1
+  deadline: 2019-03-14 19:45:36
+  admin_id: 1
+
+two:
+  title: MyString
+  description: MyText
+  members: 1
+  price_start: 1
+  price_end: 1
+  deadline: 2019-03-14 19:45:36
+  admin_id: 1
