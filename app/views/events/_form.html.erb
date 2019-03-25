@@ -11,42 +11,37 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class: 'form-control', rows: 3 %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :members %>
-    <%= form.number_field :members %>
+    <%= form.number_field :members, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :price_start %>
-    <%= form.number_field :price_start %>
+    <%= form.number_field :price_start, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :price_end %>
-    <%= form.number_field :price_end %>
+  <div class="form-group">
+    <%= form.label :price_end %> 
+    <%= form.number_field :price_end, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :deadline %>
-    <%= form.datetime_select :deadline %>
-  </div>
-
-  <div class="field">
-    <%= form.label :admin_id %>
-    <%= form.number_field :admin_id %>
+    <%= form.datetime_select :deadline, class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Submit", class: 'btn btn-danger' %>
   </div>
 <% end %>

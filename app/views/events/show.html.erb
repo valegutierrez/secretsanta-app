@@ -1,39 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col">
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
+    <h2>
+      <%= @event.title %>
+    </h2>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
+    <p>
+      <%= @event.description %>
+    </p>
 
-<p>
-  <strong>Members:</strong>
-  <%= @event.members %>
-</p>
+    <p>
+      <strong>Members:</strong>
+      <%= @event.members %>
+    </p>
 
-<p>
-  <strong>Price start:</strong>
-  <%= @event.price_start %>
-</p>
+    <%= @event.members %>
 
-<p>
-  <strong>Price end:</strong>
-  <%= @event.price_end %>
-</p>
+    <p>
+      <strong>Price range:</strong>
+      $<%= @event.price_start %> -
+      $<%= @event.price_end %> CLP
+    </p>
 
-<p>
-  <strong>Deadline:</strong>
-  <%= @event.deadline %>
-</p>
+    <p>
+      <strong>Deadline:</strong>
+      <%= @event.deadline %>
+    </p>
 
-<p>
-  <strong>Admin:</strong>
-  <%= @event.admin_id %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+    <%= link_to 'Edit', edit_event_path(@event) %> |
+    <%= link_to 'Back', events_path %>
+  </div>
+</div>
