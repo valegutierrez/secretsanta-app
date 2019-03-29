@@ -15,8 +15,6 @@
       <%= @event.members %>
     </p>
 
-    <%= @event.members %>
-
     <p>
       <strong>Price range:</strong>
       $<%= @event.price_start %> -
@@ -28,7 +26,31 @@
       <%= @event.deadline %>
     </p>
 
-    <%= link_to 'Edit', edit_event_path(@event) %> |
-    <%= link_to 'Back', events_path %>
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Members</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @event.attendances.each do |member| %>
+        <tr>
+          <td>Miembro <%= member.id %></td>
+          <td>
+            <% if member.user_id.nil? %>
+              Pending
+            <% else %>
+              Confirmed
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+    <%= link_to 'Back', events_path, class: 'btn btn-danger' %>
+    <%= link_to '' %>
   </div>
 </div>

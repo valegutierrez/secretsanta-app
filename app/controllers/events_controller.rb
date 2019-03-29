@@ -1,7 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
-  after_create :create_attendances
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :create_attendances]
 
   # GET /events
   # GET /events.json
