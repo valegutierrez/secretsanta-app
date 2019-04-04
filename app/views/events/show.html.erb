@@ -25,11 +25,16 @@
       <strong>Deadline:</strong>
       <%= @event.deadline %>
     </p>
+    <%= link_to 'Back', events_path, class: 'btn btn-danger' %>
+    <%= link_to '' %>
+  </div>
 
+  <div class="col">
     <table class="table">
     <thead>
       <tr>
-        <th scope="col">Members</th>
+        <th scope="col"></th>
+        <th scope="col">Member</th>
         <th scope="col">Status</th>
       </tr>
     </thead>
@@ -37,20 +42,24 @@
     <tbody>
       <% @event.attendances.each do |member| %>
         <tr>
-          <td>Miembro <%= member.id %></td>
-          <td>
-            <% if member.user_id.nil? %>
-              Pending
+          <% @users.each do |u| %>
+            <% if member.user_id == u.id %>
+              <td><%= image_tag u.image, height: 50, width: 50, class: 'rounded-lg'%></td>
+              <td><%= u.name %></td>
             <% else %>
-              Confirmed
+              <td><%= image_tag "new-profile", height: 50, width: 50, class: 'rounded-lg' %></td>
+              <td>Invitado</td>
+            <% end %>
+          <% end %>
+            <% if member.user_id.nil? %>
+            <td><div class="alert alert-secondary text-center">Pending</div></td>
+            <% else %>
+            <td><div class="alert alert-success text-center">Confirmed</div></td>
             <% end %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-
-    <%= link_to 'Back', events_path, class: 'btn btn-danger' %>
-    <%= link_to '' %>
   </div>
 </div>

@@ -5,7 +5,9 @@ class Event < ApplicationRecord
   after_create_commit :create_attendances
 
   def create_attendances
-    self.members.times do |m|
+    attendance_admin = Attendance.create(event_id: self.id, user_id: admin_id)
+    attendance_admin.save!
+    (self.members - 1).times do |m|
       attendance = Attendance.create(event_id: self.id)
       attendance.save!
     end

@@ -15,19 +15,44 @@
 
       <tbody>
         <% @events.each do |event| %>
-          <tr>
-            <td><%= event.title %></td>
-            <td><%= event.members %></td>
-            <td><%= event.deadline %></td>
-            <td><%= link_to 'Show', event, class: 'btn btn-danger' %></td>
-            <td><%= link_to 'Edit', edit_event_path(event), class: 'btn btn-danger' %></td>
-            <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
-          </tr>
+          <% if event.admin_id == current_user.id %>
+            <tr>
+              <td><%= event.title %></td>
+              <td><%= event.members %></td>
+              <td><%= event.deadline %></td>
+              <td><%= link_to 'Show', event, class: 'btn btn-danger' %></td>
+              <td><%= link_to 'Edit', edit_event_path(event), class: 'btn btn-danger' %></td>
+              <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>
   </div>
   <div class="col">
     <h2>Eventos a los que asisto</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Members</th>
+          <th scope="col">Deadline</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @events.each do |event| %>
+          <% if event.admin_id != current_user.id and event.attendances.where(user_id: current_user.id).present? %>
+            <tr>
+              <td><%= event.title %></td>
+              <td><%= event.members %></td>
+              <td><%= event.deadline %></td>
+              <td><%= link_to 'Show', event, class: 'btn btn-danger' %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
