@@ -7,5 +7,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :managed_events, class_name: "Event", foreign_key: "admin_id"
-
+  has_many :started_conversations, class_name: "Conversation", foreign_key: "first_user_id"
+  has_many :received_conversations, class_name: "Conversation", foreign_key: "second_user_id"
+  has_many :messages_sent, class_name: "Message", foreign_key: "sender_id"
+  has_many :messages_received, class_name: "Message", foreign_key: "receiver_id"
 end

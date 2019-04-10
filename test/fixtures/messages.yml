@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  conversation: one
+  sender_id: 1
+  receiver_id: 1
+  content: MyText
+
+two:
+  conversation: two
+  sender_id: 1
+  receiver_id: 1
+  content: MyText

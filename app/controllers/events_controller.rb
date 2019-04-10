@@ -63,6 +63,15 @@ class EventsController < ApplicationController
     end
   end
 
+  def shared_event
+    @event = Event.find_by_access_code_link(params[:code])
+    if @event.present?
+      redirect_to @event
+    else
+      redirect_to root_path, alert: 'This event does not exist.'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event

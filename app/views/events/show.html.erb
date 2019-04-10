@@ -27,6 +27,8 @@
     </p>
     <%= link_to 'Back', events_path, class: 'btn btn-danger' %>
     <%= link_to '' %>
+    <br><br>
+    <button type="button" class="btn btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Share Link</button>
   </div>
 
   <div class="col">
@@ -46,17 +48,15 @@
             <% if member.user_id == u.id %>
               <td><%= image_tag u.image, height: 50, width: 50, class: 'rounded-lg'%></td>
               <td><%= u.name %></td>
-            <% else %>
-              <td><%= image_tag "new-profile", height: 50, width: 50, class: 'rounded-lg' %></td>
-              <td>Invitado</td>
             <% end %>
           <% end %>
             <% if member.user_id.nil? %>
+            <td><%= image_tag "new-profile", height: 50, width: 50, class: 'rounded-lg' %></td>
+            <td>Invitado</td>
             <td><div class="alert alert-secondary text-center">Pending</div></td>
             <% else %>
             <td><div class="alert alert-success text-center">Confirmed</div></td>
             <% end %>
-          </td>
         </tr>
       <% end %>
     </tbody>
