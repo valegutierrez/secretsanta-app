@@ -1,12 +1,30 @@
 # Secret Santa
-## Client needs:
 
-"I'm looking to create an app to generate my 'Secret Santa' game with the rest of my friends, I need an app that lets you create a user with name and email, and then the option to create an event appears.
+## Project description
+
+This project is for Desafio Latam's full stack developer course and is based on the western tradition called **Secret Santa**.
+
+## Web app access
+
+To access this web app with heroku, click [here.]() Or you can install it in your computer with the next instructions.
+
+## Installation requirements
+
+To load this project after downloading it, you will need Ruby 2.6.0, Rails 5.2.2 and run these commands in the terminal:
+- `bundle install`
+- `rails db:migrate`
+- `rails s`
+
+Then enter in your preferred browser (I use Google Chrome) and enter to localhost:3000
+
+## Client needs
+
+"I am looking to create an app to generate my 'Secret Santa' game with the rest of my friends, I need an app that lets you create a user with name and email, and then the option to create an event appears.
 Within this event you can specify the number of friends who will participate, the price of the gift and once the event is created, provide unique links to deliver to each friend for them to create an account.
 The game administrator can not see the friends that correspond to each one, but can write announcements for the rest about the organization of the event (date and location where it will occur.
 Secret santas can send messages to their rightful friend to give clues as to who they are or ask what the other would like."
 
-## User stories:
+## User stories
 
 - As a guest, I can create a new user by entering name, email and password  to access the page later with a unique id.
   ##### Acceptance Criteria:
@@ -72,3 +90,7 @@ Secret santas can send messages to their rightful friend to give clues as to who
 ## Trello
 
 To access the Trello board, click [here.](https://trello.com/b/y0S0UhIl/secret-santa-proyecto-final-desafio-fullstack)
+
+## Database diagram
+
+![Diagrama](app/assets/images/diagrama-secretsanta.jpg)

@@ -66,9 +66,21 @@ class EventsController < ApplicationController
   def shared_event
     @event = Event.find_by_access_code_link(params[:code])
     if @event.present?
-      redirect_to @event
+      if @event.attendances.where(user_id: current_user.id).present?
+        redirect_to @event
+      else
+        redirect_to invite_user(@event)
+      end
     else
       redirect_to root_path, alert: 'This event does not exist.'
+    end
+  end
+
+  def invite_user(event)
+    if 
+      new_attendance = event.attendances.where(user_id: nil).first
+      new_attendance(user_id: current_user.id)
+      new_attendance.save!
     end
   end
 
