@@ -14,4 +14,6 @@
  *= require_self
  *= require bootstrap.min
  *= require bootstrap-grid.min
+ *= require bootstrap-social
+ *= require all.min
  */

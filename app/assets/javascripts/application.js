@@ -16,4 +16,5 @@
 //= require jquery
 //= require popper
 //= require bootstrap.min
+//= require all.min
 //= require_tree .

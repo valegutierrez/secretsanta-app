@@ -14,6 +14,16 @@ class Event < ApplicationRecord
     end
   end
 
+  def add_new_user(user)
+    @attendance = self.attendances.where(user_id: nil).first
+    if @attendance == nil
+      false
+    else
+      @attendance.update!(user_id: user.id)
+      true
+    end
+  end
+
   def set_access_link
     self.access_code_link = generate_code
   end

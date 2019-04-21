@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :store_user_location!, only: [:shared_event]
+  before_action :authenticate_user! 
   before_action :set_event, only: [:show, :edit, :update, :destroy, :create_attendances]
 
   # GET /events
@@ -64,30 +65,40 @@ class EventsController < ApplicationController
   end
 
   def shared_event
-    @event = Event.find_by_access_code_link(params[:code])
+    @event_url = after_sign_in_path_for(:user)
+    @event_url.slice! "/events/"
+    @event = Event.find(@event_url.to_i)
     if @event.present?
-      if @event.attendances.where(user_id: current_user.id).present?
-        redirect_to @event
-      else
-        redirect_to invite_user(@event)
+      if @event.attendances.where(user_id: current_user).size == 0
+        unless @event.add_new_user(current_user)
+          redirect_to root_path, alert: 'This event is full.'
+          return
+        end
       end
+      redirect_to @event
     else
       redirect_to root_path, alert: 'This event does not exist.'
     end
   end
 
-  def invite_user(event)
-    if 
-      new_attendance = event.attendances.where(user_id: nil).first
-      new_attendance(user_id: current_user.id)
-      new_attendance.save!
-    end
+  def invite_user
+    @event = event
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
+    end
+
+    def store_user_location!
+      @event = Event.find_by_access_code_link(params[:code])
+      # :user is the scope we are authenticating
+      store_location_for(:user, url_for(@event))
+    end
+
+    def after_sign_in_path_for(resource_or_scope)
+      stored_location_for(resource_or_scope) || super
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

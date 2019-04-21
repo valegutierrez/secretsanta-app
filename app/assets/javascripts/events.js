@@ -1,3 +1,8 @@
+// Copia el texto del input en Show
 $(function () {
-  $('[data-toggle="popover"]').popover()
+  $('#inputButton').click(function(){
+    $('#eventLink').focus();
+    $('#eventLink').select();
+    document.execCommand('copy');
+  });
 });

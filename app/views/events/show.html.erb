@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col">
+  <div class="col-4">
     <p id="notice"><%= notice %></p>
 
     <h2>
@@ -11,27 +11,27 @@
     </p>
 
     <p>
-      <strong>Members:</strong>
-      <%= @event.members %>
-    </p>
-
-    <p>
       <strong>Price range:</strong>
       $<%= @event.price_start %> -
       $<%= @event.price_end %> CLP
     </p>
 
     <p>
-      <strong>Deadline:</strong>
+      <strong>Event deadline:</strong>
       <%= @event.deadline %>
     </p>
-    <%= link_to 'Back', events_path, class: 'btn btn-danger' %>
-    <%= link_to '' %>
+    <h5>Share Link:</h5>
+    <div class="input-group">
+      <input type="text" id="eventLink" class="form-control" value="https://localhost:3000/shared_event/<%= @event.access_code_link %>">
+      <div class="input-group-append">
+        <button class="input-group-text" id="inputButton"><i class="far fa-clipboard"></i></button>
+      </div>
+    </div>
     <br><br>
-    <button type="button" class="btn btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Share Link</button>
+    <%= link_to 'Back', events_path, class: 'btn btn-danger' %>
   </div>
 
-  <div class="col">
+  <div class="col-8">
     <table class="table">
     <thead>
       <tr>

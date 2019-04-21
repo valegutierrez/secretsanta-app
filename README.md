@@ -32,6 +32,8 @@ Secret santas can send messages to their rightful friend to give clues as to who
   + Create model in Devise
   + Add name & photo to User
 
+- As a guest, I can register as a new user with my Facebook account instead of registering manually.
+
 - As an user, I can create an event indicating the number of people participating, price range of the gift, description of the event and deadline, after that I must be redirected to the event page.
   ##### Acceptance Criteria:
   + As an user, I can access to the event making page by pressing the button 'Create Event'.
