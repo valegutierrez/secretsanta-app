@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :store_user_location!, only: [:shared_event]
   before_action :authenticate_user! 
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :create_attendances]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :create_attendances, :create_conversations]
 
   # GET /events
   # GET /events.json
@@ -83,6 +83,16 @@ class EventsController < ApplicationController
 
   def invite_user
     @event = event
+  end
+
+  def create_conversations
+    guests = @event.attendances.shuffle!
+    guests_rotated = guests.rotate
+    pairs = guests.zip(guests_rotated)
+    pairs.each do |c|
+      conversation = Conversation.create(first_user_id: c[0].user_id, second_user_id: c[1].user_id)
+      conversation.save!
+    end
   end
 
   private

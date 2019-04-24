@@ -38,7 +38,7 @@
 
   <div class="form-group">
     <%= form.label :deadline %>
-    <%= form.datetime_select :deadline, class: 'form-control' %>
+    <%= form.datetime_field :deadline, class: 'form-control', min: Date.today %>
   </div>
 
   <div class="actions">

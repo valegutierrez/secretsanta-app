@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
   devise_for :users, :controllers => { :omniauth_callback => "users/omniauth_callbacks" }
   resources :events
 
-  root to: 'events#index'
+  root to: 'welcome#index'
 
   get 'conversations/index'
   get 'conversations/show'
