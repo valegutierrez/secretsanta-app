@@ -1,18 +1,25 @@
-<p id="notice"><%= notice %></p>
 <div class="row">
   <div class="col-md-6">
+    <div class="row">
     <h2>Welcome to Secret Santa!</h2>
     <p>This app was made to help everyone organize their gift exchange parties, offering them and alternative to communicate to his Secret Santa or Gift Receiver to give them clues about whom this person is or help them decide what to gift them.</p>
 		<p>
 		Interested in participating?
-		</p>
-    <%= link_to 'Start your first event', new_user_registration_path, class: 'btn btn-danger btn-lg' %> or
+    <div class="w-100"></div>
+    <%= link_to 'Start your first event', new_user_registration_path, class: 'btn btn-danger btn-lg' %>
+    <span class="align-self-center"> or </span>
     <%= link_to 'Log In', new_user_session_path, class: 'btn btn-secondary btn-lg' %>
-  </div>
-  <div class="col-md-6">
-		<h4>What is Secret Santa?</h4>
+    </p>
+    </div>
+    <div class="row my-3">
+    <h4>What is Secret Santa?</h4>
     <p>
 			Secret Santa is a Western Christmas tradition in which members of a group or community are randomly assigned a person to whom they give a gift. The identity of the gift giver is a secret not to be revealed until after the gift is opened.
 		</p>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-4">
+    <%= image_tag 'secretsanta-index.png', alt: 'Example Secret Santa', class: 'img-fluid' %> 
   </div>
 </div>

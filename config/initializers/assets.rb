@@ -10,6 +10,7 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'css')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'font-awesome', 'css')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'font-awesome', 'webfonts')
+Rails.application.config.assets.paths << Rails.root.join('vendor', 'fonts')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'js')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'font-awesome', 'js')
 

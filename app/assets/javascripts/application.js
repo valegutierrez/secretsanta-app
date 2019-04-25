@@ -14,6 +14,7 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery
+//= require flash-message
 //= require popper
 //= require bootstrap.min
 //= require all.min
