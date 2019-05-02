@@ -91,7 +91,6 @@ class EventsController < ApplicationController
     pairs = guests.zip(guests_rotated)
     pairs.each do |c|
       conversation = Conversation.create(first_user_id: c[0].user_id, second_user_id: c[1].user_id, event_id: @event.id)
-      conversation.save!
     end
     @event.update!(event_chat: true)
     redirect_to @event, notice: 'The Secret Santas has been succesfully distributed.'

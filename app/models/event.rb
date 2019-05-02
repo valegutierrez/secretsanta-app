@@ -9,10 +9,8 @@ class Event < ApplicationRecord
 
   def create_attendances
     attendance_admin = Attendance.create(event_id: self.id, user_id: admin_id)
-    attendance_admin.save!
     (self.members - 1).times do |m|
       attendance = Attendance.create(event_id: self.id)
-      attendance.save!
     end
   end
 
