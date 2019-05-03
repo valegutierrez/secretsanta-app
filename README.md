@@ -87,7 +87,6 @@ Secret santas can send messages to their rightful friend to give clues as to who
   ##### Acceptance Criteria:
   + Button 'Delete event' in the event page.
   + Once the button is pressed, delete the event for everyone.
-  + Once the event is deleted, notify every confirmed member.
 
 ## Trello
 

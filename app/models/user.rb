@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :attendances
   has_many :events, :through => :attendances
   has_many :notifications
   has_one_attached :image
