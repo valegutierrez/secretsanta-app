@@ -15,12 +15,9 @@
         <a class="nav-link text-light" href="<%= events_path %>">My Events</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-light" href="<%= conversations_path %>">Chat</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-light" href="<%= notifications_path %>">
-          Notifications 
-          <% if user_signed_in? %>
+        <a class="nav-link text-light" href="<%= conversations_path %>">
+          Chat
+          <% if user_signed_in? and (Notification.where(user_id: current_user.id, checked: false).count > 0) %>
             <span class="badge badge-light"><%= Notification.where(user_id: current_user.id, checked: false).count %></span>
           <% end %>
         </a>

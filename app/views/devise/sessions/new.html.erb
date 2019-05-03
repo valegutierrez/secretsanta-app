@@ -1,7 +1,8 @@
-<div class="col-md-6">
+<div class="text-center">
+  <%= image_tag 'ss-logo.svg', alt: 'Logo', height: 70 %>
   <h2>Log in</h2>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'form-signin'}) do |f| %>
     <div class="form-group">
       <%= f.label :email %><br />
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
