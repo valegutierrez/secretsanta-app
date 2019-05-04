@@ -16,11 +16,12 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
+# Use activeadmin to manage your app db as an administrator
+gem 'activeadmin'
+# Amazon S3 Gem
 gem 'aws-sdk-s3', require: false
 # Use CanCanCan to administrate authorization
 gem 'cancancan', '~> 2.0'
-# Use carrierwave to upload files
-gem 'carrierwave'
 # Use devise for authentication
 gem 'devise'
 # Use Omniauth to authenticate User with Facebook

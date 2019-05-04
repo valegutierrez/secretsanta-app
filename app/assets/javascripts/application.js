@@ -19,3 +19,9 @@
 //= require bootstrap.min
 //= require all.min
 //= require_tree .
+$(document).ready(function() {
+	$('#inputGroupFile01').change(function() { 
+		let inputLabel = $('#inputGroupFile01').val()
+		$('#labelFile').html(inputLabel);
+	});
+});

@@ -64,7 +64,7 @@ Secret santas can send messages to their rightful friend to give clues as to who
     + As an user who is messaging another (who may be either a Secret Santa or his Giftee), my message can be a question to the other person with multiple options and the receiver can choose from those options.
     + As an user who is messaging another (who may be either a Secret Santa or his Giftee), I can personalize my question and the options.
 
-- As an user, I can press a button in the main page to 'Guess my Secret Santa'. If I write my answer, I can only try once and the button gets disabled.
+- As an user, I can press a button in the main page of the event to 'Guess my Secret Santa'. If I write my answer, I can only try once and the button gets disabled.
   ##### Acceptance Criteria:
   + Once I pressed the button 'Guess my Secret Santa', make a dropdown menu appear, with every member of the event (except myself).
   + Before I send my guess, I must be warned that I wont be able to message my Secret Santa anymore.
@@ -87,7 +87,6 @@ Secret santas can send messages to their rightful friend to give clues as to who
   ##### Acceptance Criteria:
   + Button 'Delete event' in the event page.
   + Once the button is pressed, delete the event for everyone.
-  + Once the event is deleted, notify every confirmed member.
 
 ## Trello
 
