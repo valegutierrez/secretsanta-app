@@ -22,21 +22,21 @@
   /* Fonts */
   @font-face {
     font-family: 'Montserrat-thin-italic';
-    src: url(font-path('Montserrat-ThinItalic.ttf'));
-  };
+    src: url(<%= asset_path('Montserrat-ThinItalic.ttf') %>);
+  }
   
   @font-face {
     font-family: 'Montserrat-regular';
-    src: url(font-path('Montserrat-Regular.ttf')); 
+    src: url(<%= asset_path('Montserrat-Regular.ttf') %>); 
   } 
   
   @font-face {
     font-family: 'Montserrat-semibold';
-    src: url(font-path("Montserrat-SemiBoldItalic.ttf")); }
+    src: url(<%= asset_path("Montserrat-SemiBoldItalic.ttf") %>); }
   
   @font-face {
     font-family: 'Montserrat-bold';
-    src: url(font-path("Montserrat-Bold.ttf"));
+    src: url(<%= asset_path("Montserrat-Bold.ttf") %>);
   }
   .bg-danger {
     background-color: #dc3545!important;
