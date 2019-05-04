@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_03_010601) do
+ActiveRecord::Schema.define(version: 2019_05_03_223126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,15 @@ ActiveRecord::Schema.define(version: 2019_05_03_010601) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "answers", force: :cascade do |t|
+    t.text "description"
+    t.boolean "option", default: false, null: false
+    t.bigint "message_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_answers_on_message_id"
+  end
+
   create_table "attendances", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "event_id"
@@ -98,7 +107,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_010601) do
     t.bigint "conversation_id"
     t.integer "sender_id"
     t.integer "receiver_id"
-    t.text "content"
+    t.text "question"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
@@ -130,6 +139,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_010601) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "answers", "messages"
   add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "users"
   add_foreign_key "conversations", "events"
