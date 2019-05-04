@@ -24,7 +24,7 @@
                 <% if conversation.second_user_id == current_user.id %>
                   <tr>
                     <% @event = Event.find(conversation.event_id) %>
-                    <td><%= image_tag "new-profile3", height: 50, class: 'rounded-lg' %></td>
+                    <td><%= image_tag "new-profile3.png", height: 50, class: 'rounded-lg' %></td>
                     <td><%= @event.title %></td>
                     <td>
                       <div class="btn-group">
