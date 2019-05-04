@@ -18,11 +18,6 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
-    @message = Message.new
-    @message.answers.new
-    @message.answers.new
-    @message.answers.new
-    @message.answers.new
   end
 
   # GET /messages/1/edit
@@ -32,12 +27,10 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = current_user.messages.new(message_params)
-    @message.sender_id = current_user.id
-    @message.receiver_id = 
+    @message = Message.new(message_params)
 
     if @message.save
-      redirect_to @message, notice: 'Message was successfully created.'
+      redirect_to conversation_path(@message.conversation_id), notice: 'Message was successfully created.'
     else
       render action: :new
     end
@@ -60,9 +53,10 @@ class MessagesController < ApplicationController
   # DELETE /messages/1
   # DELETE /messages/1.json
   def destroy
+    @conversation = @message.conversation_id
     @message.destroy
     respond_to do |format|
-      format.html { redirect_to messages_url, notice: 'Message was successfully destroyed.' }
+      format.html { redirect_to conversation_path(@conversation), notice: 'Message was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -75,6 +69,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:question, answers_attributes: [:description])
+      params.require(:message).permit(:question, :conversation_id, :sender_id, :receiver_id, answers_attributes: [:description])
     end
 end

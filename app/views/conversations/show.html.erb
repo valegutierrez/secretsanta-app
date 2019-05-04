@@ -23,7 +23,7 @@
         </thead>
 
         <tbody>
-          <% @messages.each do |message| %>
+          <% @messages.reverse.drop(1).reverse.each do |message| %>
             <tr>
               <td><%= message.question %></td>
               <td><%= link_to 'Show', message %></td>
@@ -33,10 +33,41 @@
           <% end %>
         </tbody>
       </table>
+    </div>
+    <div class="col">
+      <%= form_with(model: @message, local: true) do |form| %>
+        <% if @message.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+      
+            <ul>
+            <% @message.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-      <br>
+        <%= form.hidden_field :conversation_id, :value => @conversation.id %>
+        <%= form.hidden_field :sender_id, :value => @message.sender_id %>
+        <%= form.hidden_field :receiver_id, :value => @message.receiver_id %>
 
-      <%= link_to 'New Message', new_message_path %>
+        <div class="form-group">
+          <%= form.label :question %>
+          <%= form.text_area :question, class: 'form-control' %>
+        </div>
+      
+        <%= form.fields_for :answers do |a| %>
+          <div class="form-group">
+            <%= a.label :description %>
+            <%= a.text_area :description, class: 'form-control' %>
+          </div>
+        <% end %>
+      
+        <div class="actions">
+          <%= form.submit %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

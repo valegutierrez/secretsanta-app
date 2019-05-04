@@ -9,9 +9,18 @@ class ConversationsController < ApplicationController
 
   def show
     @messages = @conversation.messages
-    if (@conversation.first_user_id != current_user.id) and (@conversation.second_user_id != current_user.id)
+    # Determine who is receiving the message
+    if @conversation.first_user_id == current_user.id
+      @message = @conversation.messages.new(sender_id: current_user.id, receiver_id: @conversation.second_user_id)
+    elsif @conversation.second_user_id == current_user.id
+      @message = @conversation.messages.new(sender_id: current_user.id, receiver_id: @conversation.first_user_id)
+    else
       redirect_to conversations_path, alert: 'You do not have access to this conversation.'
     end
+    @message.answers.new
+    @message.answers.new
+    @message.answers.new
+    @message.answers.new
   end
 
   private
