@@ -2,20 +2,26 @@
   <div class="col-md-6">
     <div class="row">
     <h2>Welcome to Super Secret Santa!</h2>
-    <p>SSS was made to help everyone organize their gift exchange parties, offering them and alternative to communicate to his Secret Santa or Gift Receiver to give them clues about whom this person is or help them decide what to gift them.</p>
-		<p>
-		Interested in participating?
-    <div class="w-100"></div>
-    <%= link_to 'Start your first event', new_event_path, class: 'btn btn-danger btn-lg' %>
-    <span class="align-self-center"> or </span>
-    <%= link_to 'Log In', new_user_session_path, class: 'btn btn-secondary btn-lg' %>
-    </p>
+    <p>SSS was made to help everyone organize their gift exchange parties!</p>
     </div>
-    <div class="row my-3">
+    <div class="row">
     <h4>What is Secret Santa?</h4>
     <p>
 			Secret Santa is a Western Christmas tradition in which members of a group or community are randomly assigned a person to whom they give a gift. The identity of the gift giver is a secret not to be revealed until after the gift is opened.
 		</p>
+    <h4>What makes Super Secret Santa special?</h4>
+    <p>
+      In SSS, you can message your Secret Santa or your Giftee through a message system, allowing you to send questions with multiple answers to try to figure out who this person is or what do they like to receive. This makes our game much more dynamic and fun to play!
+    </p>
+    <p>
+		  Interested in participating?
+    </p>
+    <div class="w-100"></div>
+    <p>
+      <%= link_to 'Start your first event', new_event_path, class: 'btn btn-danger' %>
+      <span class="align-self-center"> or </span>
+      <%= link_to 'Log In', new_user_session_path, class: 'btn btn-secondary' %>
+    </p>
     </div>
   </div>
   <div class="col-md-1"></div>

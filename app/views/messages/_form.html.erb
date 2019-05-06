@@ -11,19 +11,18 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= form.label :question %>
-    <%= form.text_area :question, class: 'form-control' %>
-  </div>
-
   <%= form.fields_for :answers do |a| %>
-    <div class="form-group">
-      <%= a.label :description %>
-      <%= a.text_area :description, class: 'form-control' %>
+    <div class="form-check">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><%= a.radio_button :option, class: '' %></div>
+        </div>
+        <%= a.text_area :description, readonly: true, class: 'form-control bg-white', rows: 1 %>
+      </div>
     </div>
   <% end %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Answer', class: 'btn btn-danger' %>
   </div>
 <% end %>
