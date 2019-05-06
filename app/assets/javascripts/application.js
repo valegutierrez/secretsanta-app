@@ -18,9 +18,16 @@
 //= require popper
 //= require bootstrap.min
 //= require_tree .
-$(document).ready(function() {
+jQuery(function() {
 	$('#inputGroupFile01').change(function() { 
 		var inputLabel = $('#inputGroupFile01').val()
 		$('#labelFile').html(inputLabel);
 	});
-});
+	$('input:radio').click(function(){
+		var $inputs = $('input:radio')
+  
+		if($(this).is(':checked')){
+		  $inputs.not(this).prop('checked',false);
+		}
+	});
+});(jQuery);

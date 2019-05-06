@@ -1,21 +1,21 @@
 <div class="jumbotron bg-white">
   <div class="row">
     <div class="col-md-6">
-      <h2>Question:</h2>
+      <h2>Question</h2>
       <p>
         <%= @message.question %>
       </p>
-      <h4>Options:</h4>
+      <h4>Options</h4>
       <ul class="list-group">
       <% @message.answers.each do |a| %>
         <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <%= 'bg-secondary text-white' if a.option %>">
           <%= a.description %>
         </li>
       <% end %>
-      </ul>
-      <% if @message.receiver_id == current_user.id and @message.answers.where(option: true).count < 0 %>
+      </ul><br />
+      <% if (@message.receiver_id == current_user.id) and (@message.answers.where(option: true).count == 0) %>
         <%= link_to 'Answer', edit_message_path(@message), class: 'btn btn-danger' %>
-      <% end %><br />
+      <% end %>
       <%= link_to 'Back', conversation_path(@message.conversation_id), class: 'btn btn-secondary' %>
     </div>
   </div>

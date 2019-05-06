@@ -21,8 +21,8 @@
       <ul class="list-group">
         <% @messages.reverse.drop(1).reverse.each do |m| %>
           <% if m.receiver_id == current_user.id %>
-            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-danger">
-                <a href="<%= message_path(m) %>" class="text-white">
+            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="<%= message_path(m) %>" class="text-danger">
                   <% if m.answers.where(option: true).count > 0 %>
                     <%= fa_icon('envelope-open')%>
                   <% elsif m.answers.where(option: false).count == 4 %>
@@ -30,7 +30,6 @@
                   <% end %>
                   <%= m.question %>
                 </a>
-                <span class="badge badge-pill"><%= link_to fa_icon('times'), m, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-light' %></span>
             </li>
           <% end %>
         <% end %>
@@ -39,8 +38,8 @@
       <ul class="list-group">
         <% @messages.reverse.drop(1).reverse.each do |m| %>
           <% if m.sender_id == current_user.id %>
-            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-danger">
-                <a href="<%= message_path(m) %>" class="text-white">
+            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="<%= message_path(m) %>" class="text-danger">
                   <% if m.answers.where(option: true).count > 0 %>
                     <%= fa_icon('envelope-open')%>
                   <% elsif m.answers.where(option: false).count == 4 %>

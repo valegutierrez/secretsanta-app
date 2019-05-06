@@ -20,8 +20,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'activeadmin'
 # Amazon S3 Gem
 gem 'aws-sdk-s3', require: false
-# Use CanCanCan to administrate authorization
-gem 'cancancan', '~> 2.0'
 # Use devise for authentication
 gem 'devise'
 # Use faker to create fake data in your app

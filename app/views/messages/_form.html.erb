@@ -12,7 +12,7 @@
   <% end %>
 
   <%= form.fields_for :answers do |a| %>
-    <div class="form-check">
+    <div class="form-group">
       <div class="input-group mb-2">
         <div class="input-group-prepend">
           <div class="input-group-text"><%= a.radio_button :option, class: '' %></div>
@@ -23,6 +23,7 @@
   <% end %>
 
   <div class="actions">
-    <%= form.submit 'Answer', class: 'btn btn-danger' %>
+    <%= form.submit 'Submit', class: 'btn btn-danger' %>
+    <%= link_to 'Back', @message, class: 'btn btn-secondary' %>
   </div>
 <% end %>
