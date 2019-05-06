@@ -67,7 +67,6 @@ Secret santas can send messages to their rightful friend to give clues as to who
 - As an user, I can press a button in the main page of the event to 'Guess my Secret Santa'. If I write my answer, I can only try once and the button gets disabled.
   ##### Acceptance Criteria:
   + Once I pressed the button 'Guess my Secret Santa', make a dropdown menu appear, with every member of the event (except myself).
-  + Before I send my guess, I must be warned that I wont be able to message my Secret Santa anymore.
   + Once I selected a member of the event and press another button called 'Confirm', the 'Guess my Secret Santa' button is disabled.
 
 - As an user, if I try to guess my Secret Santa, I cannot know the answer until the date of the event passes to prevent knowing before the time of the event.
