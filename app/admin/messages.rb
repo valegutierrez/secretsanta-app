@@ -12,4 +12,5 @@ ActiveAdmin.register Message do
 #   permitted
 # end
 
+filter :question
 end

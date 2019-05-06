@@ -20,8 +20,7 @@ permit_params :title, :members, :description
     column :description
     column :deadline
     column :members
-    column :price_start
-    column :price_end
+    column :price_limit
     column 'Member since' do |event|
       time_ago_in_words(event.created_at)
     end

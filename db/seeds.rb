@@ -18,8 +18,7 @@
 		title: "Event #{i + 1}",
 		description: "A event.",
 		members: 4,
-		price_start: 0,
-		price_end: 1000,
+		price_limit: 1000,
 		deadline: "2019-09-30 20:30:30",
 		admin_id: @user.id
 	)
