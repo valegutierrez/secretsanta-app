@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  resources :answers
+  resources :attendances, only: [:edit, :update]
+  resources :conversations, only: [:index, :show]
   resources :events
   resources :messages
-  resources :answers
-  resources :conversations, only: [:index, :show]
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

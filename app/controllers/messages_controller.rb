@@ -17,6 +17,9 @@ class MessagesController < ApplicationController
 
   # GET /messages/1/edit
   def edit
+    if @message.receiver_id != current_user.id
+      redirect_to conversations_path, alert: 'You cannot answer this message.'
+    end
   end
 
   # POST /messages
@@ -36,7 +39,7 @@ class MessagesController < ApplicationController
   def update
     respond_to do |format|
       if @message.update(message_params)
-        format.html { redirect_to @message, notice: 'Message was successfully updated.' }
+        format.html { redirect_to @message, notice: 'Message was successfully answered.' }
         format.json { render :show, status: :ok, location: @message }
       else
         format.html { render :edit }

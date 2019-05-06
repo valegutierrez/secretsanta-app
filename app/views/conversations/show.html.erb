@@ -1,21 +1,29 @@
 <div class="jumbotron bg-white">
   <div class="row">
     <div class="col">
-      <h1><%= fa_icon('inbox') %> Inbox</h1>
+      <h1><%= fa_icon('inbox') %> Inbox</h1> 
       <p>
         This inbox is to message
         <% if @conversation.first_user_id == current_user.id %>
-          your <span class="text-danger">Giftee <%= User.find(@conversation.second_user_id).name %></span> from <span class="text-danger"><%= @event = Event.find(@conversation.event_id).title %>.</span>
+          your <span class="text-danger">Giftee <%= User.find(@conversation.second_user_id).name %></span> from <span class="text-danger"><%= Event.find(@conversation.event_id).title %>.</span>
         <% elsif @conversation.second_user_id == current_user.id %>
-          your <span class="text-danger">Secret Santa</span> from <span class="text-danger"><%= @event = Event.find(@conversation.event_id).title %>.</span>
+          your <span class="text-danger">Secret Santa</span> from <span class="text-danger"><%= Event.find(@conversation.event_id).title %>.</span>
         <% end %>
       </p>
       <p>
         The idea is to send a question with multiple answers and the other account must select an option. Once the question is sent, you can check the answer in your 'Sent Messages' section.
       </p>
+      <% if Event.find_by(id: @conversation.event_id).deadline > Time.now %>
+        <% if @conversation.second_user_id == current_user.id and @attendance.user_guess_id == nil %>
+          <h4>Already know who is your Secret Santa?</h4>
+          <%= link_to 'Guess My Secret Santa!', edit_attendance_path(@attendance), class: 'btn btn-danger btn-lg' %>
+        <% elsif @conversation.second_user_id == current_user.id and @attendance.user_guess_id != nil %>
+          <%= link_to 'You have already tried to guess your Secret Santa', edit_attendance_path(@attendance), class: 'btn btn-secondary btn-lg disabled' %>  
+        <% end %>
+      <% end %>
     </div>
   </div>
-  <div class="row">
+  <div class="row mt-2">
     <div class="col-md-6">
       <h2>Received Messages</h2>
       <ul class="list-group">
@@ -54,39 +62,47 @@
       </ul>
     </div>
     <div class="col-md-6">
-      <h2>New Message</h2>
-      <%= form_with(model: @message, local: true) do |form| %>
-        <% if @message.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
-      
-            <ul>
-            <% @message.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
+      <% if Event.find_by(id: @conversation.event_id).deadline > Time.now %>
+        <h2>New Message</h2>
+        <% if @conversation.second_user_id == current_user.id and @attendance.user_guess_id != nil %>
+          <p>You cannot message your Secret Santa anymore.</p>
+        <% elsif @conversation.first_user_id == current_user.id and @attendance.user_guess_id != nil %>
+          <p>Your Giftee has tried to guess who you are.</p>
+        <% else %>
+          <%= form_with(model: @message, local: true) do |form| %>
+            <% if @message.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+          
+                <ul>
+                <% @message.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+                </ul>
+              </div>
             <% end %>
-            </ul>
-          </div>
-        <% end %>
 
-        <%= form.hidden_field :conversation_id, :value => @conversation.id %>
-        <%= form.hidden_field :sender_id, :value => @message.sender_id %>
-        <%= form.hidden_field :receiver_id, :value => @message.receiver_id %>
+            <%= form.hidden_field :conversation_id, :value => @conversation.id %>
+            <%= form.hidden_field :sender_id, :value => @message.sender_id %>
+            <%= form.hidden_field :receiver_id, :value => @message.receiver_id %>
 
-        <div class="form-group">
-          <%= form.label :question %>
-          <%= form.text_area :question, placeholder: 'What is your favorite color?', class: 'form-control' %>
-        </div>
-        
-        <label>Options</label>
-        <%= form.fields_for :answers do |a| %>
-          <div class="form-group">
-            <%= a.text_area :description, class: 'form-control', rows: 1, placeholder: Faker::Color.color_name %>
-          </div>
+            <div class="form-group">
+              <%= form.label :question %>
+              <%= form.text_area :question, placeholder: 'What is your favorite color?', class: 'form-control' %>
+            </div>
+            
+            <label>Options</label>
+            <%= form.fields_for :answers do |a| %>
+              <div class="form-group">
+                <%= a.text_area :description, class: 'form-control', rows: 1, placeholder: Faker::Color.color_name %>
+              </div>
+            <% end %>
+          
+            <div class="actions">
+              <%= form.submit 'Send', class: 'btn btn-danger' %>
+            </div>
+          <% end %>
         <% end %>
-      
-        <div class="actions">
-          <%= form.submit 'Send', class: 'btn btn-danger' %>
-        </div>
       <% end %>
     </div>
   </div>

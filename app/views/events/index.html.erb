@@ -24,7 +24,7 @@
 
             <tbody>
               <% @events.each do |event| %>
-                <% if event.admin_id == current_user.id %>
+                <% if event.admin_id == current_user.id and event.deadline > Time.now %>
                   <tr>
                     <td><%= event.title %></td>
                     <td><%= event.deadline.strftime("%B %d, %Y") %></td>
@@ -35,9 +35,9 @@
                           Actions
                         </button>
                         <div class="dropdown-menu">
-                          <%= link_to 'Show', event, class: 'dropdown-item' %>
-                          <%= link_to 'Edit', edit_event_path(event), class: 'dropdown-item' %>
-                          <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %>
+                          <%= link_to fa_icon('search') + ' Show', event, class: 'dropdown-item' %>
+                          <%= link_to fa_icon('edit') + ' Edit', edit_event_path(event), class: 'dropdown-item' %>
+                          <%= link_to fa_icon('trash') + ' Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %>
                         </div>
                       </div>
                     </td>
@@ -65,7 +65,7 @@
 
             <tbody>
               <% @events.each do |event| %>
-                <% if event.admin_id != current_user.id and event.attendances.where(user_id: current_user.id).present? %>
+                <% if event.admin_id != current_user.id and event.attendances.where(user_id: current_user.id).present? and event.deadline > Time.now %>
                   <tr>
                     <td><%= event.title %></td>
                     <td><%= event.deadline.strftime("%B %d, %Y") %></td>
@@ -80,6 +80,46 @@
                         </div>
                       </div>
                     </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col">
+      <h2>Finished Events</h2>
+      <div class="card">
+        <div class="card-body p-0 table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Guessed Correctly?</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @events.each do |event| %>
+                <% if event.attendances.where(user_id: current_user.id).present? and event.deadline < Time.now %>
+                  <tr>
+                    <td><%= event.title %></td>
+                    <td><%= event.deadline.strftime("%B %d, %Y") %></td>
+                    <td><%= event.deadline.strftime("%I:%M%p") %></td>
+                    <td>
+                    <% if event.attendances.find_by(user_id: current_user.id).user_guess_id == event.conversations.find_by(second_user_id: current_user.id).first_user_id %>
+                      Si (ﾉ´ヮ`)ﾉ*: ･ﾟ
+                    <% else %>
+                      No 	。゜゜(´Ｏ`) ゜゜。
+                    <% end %>
+                    </td>
+                    <td><%= link_to fa_icon('trash') + ' Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
                   </tr>
                 <% end %>
               <% end %>

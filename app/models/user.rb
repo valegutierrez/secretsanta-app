@@ -10,7 +10,7 @@ class User < ApplicationRecord
          :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :managed_events, class_name: "Event", foreign_key: "admin_id", :dependent => :destroy
-  has_many :guessings, class_name: "Guess", foreign_key: "user_guess_id", :dependent => :destroy
+  has_many :guessings, class_name: "Attendance", foreign_key: "user_guess_id", :dependent => :destroy
   has_many :started_conversations, class_name: "Conversation", foreign_key: "first_user_id", :dependent => :destroy
   has_many :received_conversations, class_name: "Conversation", foreign_key: "second_user_id", :dependent => :destroy
   has_many :messages_sent, class_name: "Message", foreign_key: "sender_id", :dependent => :destroy

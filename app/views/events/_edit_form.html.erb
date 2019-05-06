@@ -21,10 +21,7 @@
     <%= form.text_area :description, class: 'form-control', rows: 3 %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :members %>
-    <%= form.number_field :members, min: 3, class: 'form-control' %>
-  </div>
+  <%= form.hidden_field :members %>
 
   <div class="form-group">
     <%= form.label :price_limit %> 

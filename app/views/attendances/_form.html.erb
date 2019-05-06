@@ -1,0 +1,26 @@
+<%= form_with(model: attendance, local: true, class: 'form-signin') do |form| %>
+  <% if attendance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
+
+      <ul>
+      <% attendance.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :event_id %>
+  <%= form.hidden_field :user_id %>
+
+  <div class="form-group">
+    <label>Select User</label>
+    <%= form.select :user_guess_id, @users.collect { |u| [ u.name, u.id ] } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Submit", class: 'btn btn-danger' %>
+    <%= link_to 'Back', :back, class: 'btn btn-secondary' %>
+  </div>
+<% end %>

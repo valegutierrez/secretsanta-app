@@ -1,31 +1,25 @@
 <div class="jumbotron bg-white">
   <div class="row">
-    <div class="col-4">
-
-      <h2>
+    <div class="col-md-4">
+      <h1>
         <%= fa_icon('gift') %> <%= @event.title %>
-      </h2>
-
+      </h1>
       <p>
         <%= @event.description %>
       </p>
-
       <p>
-        <strong>Price range:</strong>
-        $<%= @event.price_start %> -
-        $<%= @event.price_end %> CLP
+        <h6>Price limit</h6>
+        $<%= @event.price_limit %>
       </p>
-
       <p>
-        <strong>Date:</strong>
+        <h6>Date</h6>
         <%= @event.deadline.strftime("%B %d, %Y") %>
       </p>
-
       <p>
-        <strong>Hour:</strong>
+        <h6>Hour</h6>
         <%= @event.deadline.strftime("%I:%M%p") %>
       </p>
-      <h5>Share Link:</h5>
+      <h6>Share Link</h6>
       <div class="input-group">
         <input type="text" id="eventLink" class="form-control" value="http://super-secretsanta.herokuapp.com/shared_event/<%= @event.access_code_link %>">
         <div class="input-group-append">
@@ -45,7 +39,7 @@
         <% end %>
     </div>
 
-    <div class="col-8">
+    <div class="col-md-8">
       <div class="card">
         <div class="card-body p-0 table-responsive">
           <table class="table">

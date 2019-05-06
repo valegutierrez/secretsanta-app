@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_06_070301) do
+ActiveRecord::Schema.define(version: 2019_05_06_174228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_05_06_070301) do
     t.bigint "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_guess_id"
     t.index ["event_id"], name: "index_attendances_on_event_id"
     t.index ["user_id"], name: "index_attendances_on_user_id"
   end
@@ -93,22 +94,13 @@ ActiveRecord::Schema.define(version: 2019_05_06_070301) do
     t.string "title"
     t.text "description"
     t.integer "members"
-    t.integer "price_start"
-    t.integer "price_end"
+    t.integer "price_limit"
     t.datetime "deadline"
     t.integer "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "access_code_link"
     t.boolean "event_chat", default: false, null: false
-  end
-
-  create_table "guesses", force: :cascade do |t|
-    t.bigint "user_id"
-    t.integer "user_guess_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_guesses_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -151,7 +143,6 @@ ActiveRecord::Schema.define(version: 2019_05_06_070301) do
   add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "users"
   add_foreign_key "conversations", "events"
-  add_foreign_key "guesses", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "notifications", "conversations"
   add_foreign_key "notifications", "users"

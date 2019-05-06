@@ -13,6 +13,9 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @users = User.all
+    if @event.deadline < Time.now
+      redirect_to events_path, alert: 'This event has finished.'
+    end
   end
 
   # GET /events/new
@@ -71,13 +74,13 @@ class EventsController < ApplicationController
     if @event.present?
       if @event.attendances.where(user_id: current_user).size == 0
         unless @event.add_new_user(current_user)
-          redirect_to root_path, alert: 'This event is full.'
+          redirect_to events_path, alert: 'This event is full.'
           return
         end
       end
       redirect_to @event
     else
-      redirect_to root_path, alert: 'This event does not exist.'
+      redirect_to events_path, alert: 'This event does not exist.'
     end
   end
 
@@ -114,6 +117,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :description, :members, :price_start, :price_end, :deadline, :admin_id)
+      params.require(:event).permit(:title, :description, :members, :price_limit, :deadline, :admin_id)
     end
 end

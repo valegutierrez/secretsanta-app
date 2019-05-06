@@ -21,7 +21,7 @@
 
             <tbody>
               <% @conversations.each do |conversation| %>
-                <% if conversation.second_user_id == current_user.id %>
+                <% if conversation.second_user_id == current_user.id and Event.find_by(id: conversation.event_id).deadline > Time.now %>
                   <tr>
                     <% @event = Event.find(conversation.event_id) %>
                     <td><%= image_tag "new-profile3.png", height: 50, class: 'rounded-lg' %></td>
@@ -60,7 +60,7 @@
 
             <tbody>
               <% @conversations.each do |conversation| %>
-                <% if conversation.first_user_id == current_user.id %>
+                <% if conversation.first_user_id == current_user.id and Event.find_by(id: conversation.event_id).deadline > Time.now%>
                   <tr>
                     <% @event = Event.find(conversation.event_id) %>
                     <td><%= image_tag User.find(conversation.second_user_id).image, height: 50, class: 'rounded-lg' %></td>
@@ -77,6 +77,65 @@
                       </div>
                     </td>
                   </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col">
+      <h2>My Past Conversations</h2>
+      <div class="card">
+        <div class="card-body p-0 table-responsive">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Event</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @conversations.each do |conversation| %>
+                <% if Event.find_by(id: conversation.event_id).deadline < Time.now %>
+                  <%if conversation.first_user_id == current_user.id %>
+                    <tr>
+                      <% @event = Event.find(conversation.event_id) %>
+                      <td><%= image_tag User.find(conversation.second_user_id).image, height: 50, class: 'rounded-lg' %></td>
+                      <td><%= @event.title %></td>
+                      <td>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Actions
+                          </button>
+                          <div class="dropdown-menu">
+                            <%= link_to fa_icon('inbox') + ' Inbox', conversation, class: 'dropdown-item' %>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  <% elsif conversation.second_user_id == current_user.id %>
+                    <tr>
+                      <% @event = Event.find(conversation.event_id) %>
+                      <td><%= image_tag User.find(conversation.first_user_id).image, height: 50, class: 'rounded-lg' %></td>
+                      <td><%= @event.title %></td>
+                      <td>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Actions
+                          </button>
+                          <div class="dropdown-menu">
+                            <%= link_to fa_icon('inbox') + ' Inbox', conversation, class: 'dropdown-item' %>
+                            <%= link_to fa_icon('trash') + ' Destroy', conversation, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  <% end %>
                 <% end %>
               <% end %>
             </tbody>

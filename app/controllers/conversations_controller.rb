@@ -9,6 +9,7 @@ class ConversationsController < ApplicationController
   end
 
   def show
+    @attendance = Attendance.find_by(event_id: @conversation.event_id, user_id: @conversation.second_user_id)
     @messages = @conversation.messages
     # Determine who is receiving the message
     if @conversation.first_user_id == current_user.id
