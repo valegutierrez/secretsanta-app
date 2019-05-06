@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_03_223126) do
+ActiveRecord::Schema.define(version: 2019_05_06_070301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,14 @@ ActiveRecord::Schema.define(version: 2019_05_03_223126) do
     t.boolean "event_chat", default: false, null: false
   end
 
+  create_table "guesses", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "user_guess_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_guesses_on_user_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.bigint "conversation_id"
     t.integer "sender_id"
@@ -143,6 +151,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_223126) do
   add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "users"
   add_foreign_key "conversations", "events"
+  add_foreign_key "guesses", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "notifications", "conversations"
   add_foreign_key "notifications", "users"
