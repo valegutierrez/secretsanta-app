@@ -79,10 +79,6 @@ Secret santas can send messages to their rightful friend to give clues as to who
   ##### Acceptance Criteria:
   + If the event deadline has already been passed, disable the 'Guess my Secret Santa' button.
 
-- As an user, after the event's deadline has passed, I will be able to see a ranking of all members, showing the ones who have guessed correctly. And show them in chronological order.
-  ###### Acceptance Criteria:
-  + Make an automatic ranking, showing the users who have guessed correctly.
-
 - As administrator of the event, I will have a button in my event to 'Cancel the event' in case I won't be hosting one anymore to delete the page for everyone.
   ##### Acceptance Criteria:
   + Button 'Delete event' in the event page.
