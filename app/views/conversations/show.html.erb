@@ -1,40 +1,61 @@
 <div class="jumbotron bg-white">
   <div class="row">
     <div class="col">
-      <h1>Inbox</h1>
+      <h1><%= fa_icon('inbox') %> Inbox</h1>
       <p>
         This inbox is to message
         <% if @conversation.first_user_id == current_user.id %>
-          your <span class="text-danger">Gift Receiver <%= User.find(@conversation.second_user_id).name %></span> from <span class="text-danger"><%= @event = Event.find(@conversation.event_id).title %></span>
+          your <span class="text-danger">Giftee <%= User.find(@conversation.second_user_id).name %></span> from <span class="text-danger"><%= @event = Event.find(@conversation.event_id).title %>.</span>
         <% elsif @conversation.second_user_id == current_user.id %>
-          your <span class="text-danger">Secret Santa</span> from <span class="text-danger"><%= @event = Event.find(@conversation.event_id).title %></span>
+          your <span class="text-danger">Secret Santa</span> from <span class="text-danger"><%= @event = Event.find(@conversation.event_id).title %>.</span>
         <% end %>
+      </p>
+      <p>
+        The idea is to send a question with multiple answers and the other account must select an option. Once the question is sent, you can check the answer in your 'Sent Messages' section.
       </p>
     </div>
   </div>
   <div class="row">
-    <div class="col">
-      <table>
-        <thead>
-          <tr>
-            <th>Questions</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @messages.reverse.drop(1).reverse.each do |message| %>
-            <tr>
-              <td><%= message.question %></td>
-              <td><%= link_to 'Show', message %></td>
-              <td><%= link_to 'Edit', edit_message_path(message) %></td>
-              <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
+    <div class="col-md-6">
+      <h2>Received Messages</h2>
+      <ul class="list-group">
+        <% @messages.reverse.drop(1).reverse.each do |m| %>
+          <% if m.receiver_id == current_user.id %>
+            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-danger">
+                <a href="<%= message_path(m) %>" class="text-white">
+                  <% if m.answers.where(option: true).count > 0 %>
+                    <%= fa_icon('envelope-open')%>
+                  <% elsif m.answers.where(option: false).count == 4 %>
+                    <%= fa_icon('envelope')%>
+                  <% end %>
+                  <%= m.question %>
+                </a>
+                <span class="badge badge-pill"><%= link_to fa_icon('times'), m, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-light' %></span>
+            </li>
           <% end %>
-        </tbody>
-      </table>
+        <% end %>
+      </ul>
+      <h2>Sent Messages</h2>
+      <ul class="list-group">
+        <% @messages.reverse.drop(1).reverse.each do |m| %>
+          <% if m.sender_id == current_user.id %>
+            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-danger">
+                <a href="<%= message_path(m) %>" class="text-white">
+                  <% if m.answers.where(option: true).count > 0 %>
+                    <%= fa_icon('envelope-open')%>
+                  <% elsif m.answers.where(option: false).count == 4 %>
+                    <%= fa_icon('envelope')%>
+                  <% end %>
+                  <%= m.question %>
+                </a>
+                <span class="badge badge-pill"><%= link_to fa_icon('times'), m, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-light' %></span>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
     </div>
-    <div class="col">
+    <div class="col-md-6">
+      <h2>New Message</h2>
       <%= form_with(model: @message, local: true) do |form| %>
         <% if @message.errors.any? %>
           <div id="error_explanation">
@@ -54,18 +75,18 @@
 
         <div class="form-group">
           <%= form.label :question %>
-          <%= form.text_area :question, class: 'form-control' %>
+          <%= form.text_area :question, placeholder: 'What is your favorite color?', class: 'form-control' %>
         </div>
-      
+        
+        <label>Options</label>
         <%= form.fields_for :answers do |a| %>
           <div class="form-group">
-            <%= a.label :description %>
-            <%= a.text_area :description, class: 'form-control' %>
+            <%= a.text_area :description, class: 'form-control', rows: 1, placeholder: Faker::Color.color_name %>
           </div>
         <% end %>
       
         <div class="actions">
-          <%= form.submit %>
+          <%= form.submit 'Send', class: 'btn btn-danger' %>
         </div>
       <% end %>
     </div>

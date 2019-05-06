@@ -6,7 +6,7 @@ This project is for Desafio Latam's full stack developer course and is based on 
 
 ## Web app access
 
-To access this web app with heroku, click [here.]() Or you can install it in your computer with the next instructions.
+To access this web app with heroku, click [here.](https://super-secretsanta.herokuapp.com/) Or you can install it in your computer with the next instructions.
 
 ## Installation requirements
 

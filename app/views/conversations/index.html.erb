@@ -1,8 +1,8 @@
 <div class="jumbotron bg-white">
   <div class="row">
     <div class="col">
-      <h1>Chat</h1>
-      <p>Here you'll find your conversations with your Secret Santas or your Gift Receivers!</p>
+      <h1><%= fa_icon('comments') %> Chat</h1>
+      <p>Here you'll find your conversations with your Secret Santas or your Giftees!</p>
     </div>
   </div>
   <div class="row">
@@ -24,7 +24,7 @@
                 <% if conversation.second_user_id == current_user.id %>
                   <tr>
                     <% @event = Event.find(conversation.event_id) %>
-                    <td><%= image_tag "new-profile3", height: 50, class: 'rounded-lg' %></td>
+                    <td><%= image_tag "new-profile3.png", height: 50, class: 'rounded-lg' %></td>
                     <td><%= @event.title %></td>
                     <td>
                       <div class="btn-group">
@@ -32,7 +32,7 @@
                           Actions
                         </button>
                         <div class="dropdown-menu">
-                          <%= link_to 'Show', conversation, class: 'dropdown-item' %>
+                          <%= link_to fa_icon('inbox') + ' Inbox', conversation, class: 'dropdown-item' %>
                         </div>
                       </div>
                     </td>
@@ -72,7 +72,7 @@
                           Actions
                         </button>
                         <div class="dropdown-menu">
-                          <%= link_to 'Show', conversation, class: 'dropdown-item' %>
+                          <%= link_to fa_icon('inbox') + ' Inbox', conversation, class: 'dropdown-item' %>
                         </div>
                       </div>
                     </td>

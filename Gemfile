@@ -24,6 +24,10 @@ gem 'aws-sdk-s3', require: false
 gem 'cancancan', '~> 2.0'
 # Use devise for authentication
 gem 'devise'
+# Use faker to create fake data in your app
+gem 'faker'
+# Use font-awesome to show icons in your app
+gem 'font-awesome-rails'
 # Use Omniauth to authenticate User with Facebook
 gem 'omniauth-facebook'
 
