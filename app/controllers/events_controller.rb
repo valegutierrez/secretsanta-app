@@ -12,6 +12,9 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    if @event.attendances.where(user_id: current_user.id).count <= 0
+      redirect_to events_path, alert: 'You cannot enter this event.'
+    end
     @users = User.all
     if @event.deadline < Time.now
       redirect_to events_path, alert: 'This event has finished.'
